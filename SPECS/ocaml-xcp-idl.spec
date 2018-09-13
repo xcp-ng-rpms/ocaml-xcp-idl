@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        1.43.0
-Release:        2%{?dist}
+Version:        1.52.0
+Release:        3%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
 Source0:        https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v%{version}&format=tar.gz&prefix=xcp-idl-%{version}#/xcp-idl-%{version}.tar.gz
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.43.0&format=tar.gz&prefix=xcp-idl-1.43.0#/xcp-idl-1.43.0.tar.gz) = b062924ccc99713e9836e5c9b33b30734febce85
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.52.0&format=tar.gz&prefix=xcp-idl-1.52.0#/xcp-idl-1.52.0.tar.gz) = 94bd8c3a6aa67f99342058243ec7388427b8fde5
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
@@ -72,6 +72,64 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl
 
 %changelog
+* Thu Jul 05 2018 Christian Lindig <christian.lindig@citrix.com> - 1.52.0-1
+- CA-292641: Collect log messages from libs using Logs
+- CA-292641: debug: use private buffer for logs formatter
+
+* Fri Jun 29 2018 Christian Lindig <christian.lindig@citrix.com> - 1.51.0-1
+- Fix build with rpclib 5.8.0
+
+* Thu Jun 28 2018 Christian Lindig <christian.lindig@citrix.com> - 1.50.0-1
+- CP-28132: Remove domain_uuid from attach result
+- Add new attach interface from SMAPIv3
+- Mark old VDI.attach as deprecated in docstring
+- storage_interface: Add helper to parse NBD uri
+- storage_interface: Add test for parse_nbd_uri helper
+- Fix build with rpclib 5.8.0
+
+* Tue Jun 05 2018 Christian Lindig <christian.lindig@citrix.com> - 1.49.0-1
+- CP-28365: do not lose the exception text in log_and_ignore_exn
+
+* Tue May 29 2018 Christian Lindig <christian.lindig@citrix.com> - 1.48.0-1
+- xcp: update and simplify interface using fd-send-recv >= 2.0.0
+- posix_channel: make it even clearer that the token is a throwaway buffer
+- lib/channel_helper: Lwt_unix requires bytes
+- lib/channel_helper: use bytes for the io_vector
+- move the standalone tool channel_helper to misc
+
+* Thu May 24 2018 Christian Lindig <christian.lindig@citrix.com> - 1.47.0-1
+- CA-289145: Close socket if error occurs when connecting
+- xcp-idl: port to safe-strings
+- network: make safe-string compliant
+- lib/cohttp_posix_io: avoid bytes where possible
+- lib/xcp_service: be more conservative with unsafe_of_string
+
+* Fri May 18 2018 Christian Lindig <christian.lindig@citrix.com> - 1.46.0-1
+- Fix compilation of vdi_automaton_test
+
+* Mon May 14 2018 Christian Lindig <christian.lindig@citrix.com> - 1.45.0-1
+- vdi_automaton: extract test into a runnable test
+- xcp.opam, {storage,xen}/jbuild: use the new rpc 5.0.0 and rpclib-legacy
+
+* Thu May 10 2018 Christian Lindig <christian.lindig@citrix.com> - 1.44.0-1
+- CP-26583: Derive RPC type for auxiliary types
+- CP-26583: Port Rrd client to PPX
+- CP-26583: Add Rrdd debugging CLI
+- CP-26583: Rrd: Build debug CLI, remove Camlp4 dependency
+- CP-26583: Port Rrdd interface to use PPX-based RPCs
+- CP-26583: Update docstrings, client gen and error type
+- CP-26583: Add protocol-string conversion helpers, add protocol error, 
+            update docstrings
+- CP-26583: Update Rrd interface formatting and docstrings
+- CP-26583: Don't discard internal errors
+- CP-26583: Remove old rrd_idl_test and move test data to be ppx friendly
+- CP-26583: Generalize idl tests over marshaller
+- CP-26583: Add (failing) test of rrd interface
+- CP-26583: Fix things until the RRD tests pass.
+- CP-26583: Update RRD interface doc strings
+- CP-26583: Register Rrdd PPX error printer, minor changes
+- rrd_interface: fix type used in printer
+
 * Wed Apr 04 2018 Marcello Seri <marcello.seri@citrix.com> - 1.43.0-2
 - Update SPEC file to get rid of rpmbuild warnings
 
