@@ -35,11 +35,9 @@ developing applications that use %{name}.
 %autosetup -p1 -n xcp-idl-%{version}
 
 %build
-eval $(opam config env  --root=/usr/lib/opamroot)
 make %{?coverage:runtime-coverage}
 
 %install
-eval $(opam config env  --root=/usr/lib/opamroot)
 export OCAMLFIND_LDCONF=ignore
 export OCAMLFIND_DESTDIR=%{build_ocaml_libdir}
 mkdir -p $OCAMLFIND_DESTDIR
