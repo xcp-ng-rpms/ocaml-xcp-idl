@@ -1,14 +1,17 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        1.52.0
-Release:        3%{?dist}
+Version:        1.71.0
+Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
-Source0:        https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v%{version}&format=tar.gz&prefix=xcp-idl-%{version}#/xcp-idl-%{version}.tar.gz
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.52.0&format=tar.gz&prefix=xcp-idl-1.52.0#/xcp-idl-1.52.0.tar.gz) = 94bd8c3a6aa67f99342058243ec7388427b8fde5
-BuildRequires:  ocaml-camlp4-devel
+
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.71.0&format=tar.gz&prefix=ocaml-xcp-idl-1.71.0#/xcp-idl-1.71.0.tar.gz
+
+
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.71.0&format=tar.gz&prefix=ocaml-xcp-idl-1.71.0#/xcp-idl-1.71.0.tar.gz) = 7afb283746a8d9e2ad1bcf675e9a449f1890c298
+
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
 
@@ -19,6 +22,7 @@ BuildRequires:  message-switch-devel
 Common interface definitions for XCP services.
 
 %package        devel
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.71.0&format=tar.gz&prefix=ocaml-xcp-idl-1.71.0#/xcp-idl-1.71.0.tar.gz) = 7afb283746a8d9e2ad1bcf675e9a449f1890c298
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel%{?_isa}
@@ -28,19 +32,16 @@ Requires:       xs-opam-repo
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
-%global ocaml_libdir /usr/lib/opamroot/system/lib
+%global ocaml_libdir /usr/lib/opamroot/ocaml-system/lib
 %global build_ocaml_libdir %{buildroot}%{ocaml_libdir}
 
 %prep
-%autosetup -p1 -n xcp-idl-%{version}
+%autosetup -p1
 
 %build
 make %{?coverage:runtime-coverage}
 
 %install
-export OCAMLFIND_LDCONF=ignore
-export OCAMLFIND_DESTDIR=%{build_ocaml_libdir}
-mkdir -p $OCAMLFIND_DESTDIR
 DESTDIR=${RPM_BUILD_ROOT} %{__make} install
 
 # this is to make opam happy
@@ -50,28 +51,108 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %files
 %doc MAINTAINERS
 %doc %{ocaml_libdir}/../doc/xapi-idl/CHANGES
-%doc %{ocaml_libdir}/../doc/xapi-idl/LICENSE 
+%doc %{ocaml_libdir}/../doc/xapi-idl/LICENSE
 %doc %{ocaml_libdir}/../doc/xapi-idl/README.md
-%{ocaml_libdir}/xcp
+%{ocaml_libdir}/xapi-idl
 %{ocaml_libdir}/stublibs/*.so
-%exclude %{ocaml_libdir}/xcp/*.a
-%exclude %{ocaml_libdir}/xcp/*.cmx
-%exclude %{ocaml_libdir}/xcp/*.cmxa
-%exclude %{ocaml_libdir}/xcp/*.cmxs
-%exclude %{ocaml_libdir}/xcp/*.mli
-%exclude %{ocaml_libdir}/xcp/*.cmt
-%exclude %{ocaml_libdir}/xcp/*.cmti
+%exclude %{ocaml_libdir}/xapi-idl/*.a
+%exclude %{ocaml_libdir}/xapi-idl/*.cmx
+%exclude %{ocaml_libdir}/xapi-idl/*.cmxa
+%exclude %{ocaml_libdir}/xapi-idl/*.cmxs
+%exclude %{ocaml_libdir}/xapi-idl/*.mli
+%exclude %{ocaml_libdir}/xapi-idl/*.cmt
+%exclude %{ocaml_libdir}/xapi-idl/*.cmti
+%exclude %{ocaml_libdir}/../doc/xapi-idl
+%exclude %{ocaml_libdir}/xcp/*
 %exclude %{ocaml_libdir}/../doc/xcp
 
 %files devel
-%{ocaml_libdir}/xcp/*.a
-%{ocaml_libdir}/xcp/*.cmx
-%{ocaml_libdir}/xcp/*.cmxa
-%{ocaml_libdir}/xcp/*.cmxs
-%{ocaml_libdir}/xcp/*.mli
-%{ocaml_libdir}/xapi-idl
+%{ocaml_libdir}/xapi-idl/*.a
+%{ocaml_libdir}/xapi-idl/*.cmx
+%{ocaml_libdir}/xapi-idl/*.cmxa
+%{ocaml_libdir}/xapi-idl/*.cmxs
+%{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Tue Jan 29 2019 Christian Lindig <christian.lindig@citrix.com> - 1.71.0-1
+- CP-30508: Add iommu capability to Host information
+- Add whether host supports hvm to Host information
+
+* Wed Jan 23 2019 Christian Lindig <christian.lindig@citrix.com> - 1.70.0-1
+- Prepare for Dune 1.6
+
+* Tue Jan 22 2019 Christian Lindig <christian.lindig@citrix.com> - 1.69.0-1
+- CA-307829: XSI-216 Add active state to VGPU
+- CA-272180: allow reporting of suspend ack failures
+- CA-272180: allow reporting of suspend timeouts
+- maintenance: whitespace
+
+* Fri Jan 11 2019 Christian Lindig <christian.lindig@citrix.com> - 1.68.0-1
+- Deprecated package rrd in favour of xapi-rrd. (#261)
+
+* Tue Dec 18 2018 Christian Lindig <christian.lindig@citrix.com> - 1.67.0-1
+- CP-29967: sandboxing support for varstored
+- CP-29967: add tests for varstore interfaces
+- CA-302981: Add a timeout to varstored-guard RPC calls
+- CP-30032: add path to varstore.privileged.destroy
+- add missing tests for cluster and v6 interfaces
+- Travis: use OCaml 4.07
+
+* Tue Dec 04 2018 Christian Lindig <christian.lindig@citrix.com> - 1.66.0-1
+- Reference xapi-inventory instead of xcp-inventory; the latter is being
+  deprecated. (#256)
+
+* Wed Nov 28 2018 Konstantina Chremmou <konstantina.chremmou@citrix.com> - 1.65.0-2
+- xcp deprecated in favour of xapi-idl
+
+* Tue Nov 27 2018 Christian Lindig <christian.lindig@citrix.com> - 1.65.0-1
+- Register printer for Xmlm errors
+- .travis.yml: use debian-9 instead of debian-testing
+
+* Fri Nov 16 2018 Christian Lindig <christian.lindig@citrix.com> - 1.64.0-1
+- Switch to new ocaml-rpc interface
+- Switch xen/jbuild to updated way to specify ppxs
+
+* Thu Nov 01 2018 Christian Lindig <christian.lindig@citrix.com> - 1.63.0-1
+- Update opam files for Opam 2
+
+* Thu Oct 11 2018 Rob Hoes <rob.hoes@citrix.com> - 1.62.0-1
+- CP-28301, CP-28659, CP-28662: add firmware type and NVRAM parameter for xenopsd
+
+* Tue Oct 09 2018 Christian Lindig <christian.lindig@citrix.com> - 1.61.0-1
+- Fix unit test after introduction of cancellable field
+- Travis: test the xcp package not the dummy package
+
+* Thu Oct 04 2018 Christian Lindig <christian.lindig@citrix.com> - 1.60.0-1
+- network_interface: add Bridge_does_not_exist error
+
+* Mon Oct 01 2018 Christian Lindig <christian.lindig@citrix.com> - 1.59.0-1
+- storage_interface: add implementations_of_backend helper from xapi
+- network_interface: add Interface_does_not_exist error
+
+* Wed Sep 26 2018 Christian Lindig <christian.lindig@citrix.com> - 1.58.0-1
+- CA-290696: Add field cancellable for task
+
+* Mon Sep 24 2018 Christian Lindig <christian.lindig@citrix.com> - 1.57.0-1
+- CP-27110: PPX the storage interface
+
+* Mon Sep 17 2018 Christian Lindig <christian.lindig@citrix.com> - 1.56.0-1
+- Use Dune, update opam files
+- Fix clerical error of xenops exception - report correct module
+
+* Wed Sep 05 2018 Christian Lindig <christian.lindig@citrix.com> - 1.55.0-1
+- jbuild: remove ppx_deriving_rpc from libraries
+- Fix unit tests: add missing functions
+- Convert xenops interface from camlp4 to new ppx style
+- Fix Travis: Use DISTRO=debian-testing to work around curl error
+
+* Tue Aug 21 2018 Christian Lindig <christian.lindig@citrix.com> - 1.54.0-1
+- Task/Updates: Remove dependence on camlp4 style interfaces
+- Remove calls to ocamlfind from within jbuild files
+
+* Mon Aug 13 2018 Christian Lindig <christian.lindig@citrix.com> - 1.53.0-1
+- CP-29027: cluster_interface: Add startup_finished to diagnostics
+
 * Thu Jul 05 2018 Christian Lindig <christian.lindig@citrix.com> - 1.52.0-1
 - CA-292641: Collect log messages from libs using Logs
 - CA-292641: debug: use private buffer for logs formatter
@@ -118,7 +199,7 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 - CP-26583: Rrd: Build debug CLI, remove Camlp4 dependency
 - CP-26583: Port Rrdd interface to use PPX-based RPCs
 - CP-26583: Update docstrings, client gen and error type
-- CP-26583: Add protocol-string conversion helpers, add protocol error, 
+- CP-26583: Add protocol-string conversion helpers, add protocol error,
             update docstrings
 - CP-26583: Update Rrd interface formatting and docstrings
 - CP-26583: Don't discard internal errors
@@ -160,7 +241,7 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 - CA-285213 add error logging for Network_interface
 - CA-285213 add error logging for V6_interface
 - CA-285213 add error logging for Gpumon_interface
-- network_interface: extend the abstract type declaration for 
+- network_interface: extend the abstract type declaration for
   compatibility with rpc 3.2.0
 - xcp_service: Re_emacs -> Re.Emacs to get rid of deprecation warnings
 - cluster_interface: update to the new idl error functor
