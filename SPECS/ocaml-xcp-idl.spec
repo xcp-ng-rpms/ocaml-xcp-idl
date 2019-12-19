@@ -1,16 +1,16 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        1.71.0
+Version:        1.86.0
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.71.0&format=tar.gz&prefix=ocaml-xcp-idl-1.71.0#/xcp-idl-1.71.0.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.86.0&format=tar.gz&prefix=ocaml-xcp-idl-1.86.0#/xcp-idl-1.86.0.tar.gz
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.71.0&format=tar.gz&prefix=ocaml-xcp-idl-1.71.0#/xcp-idl-1.71.0.tar.gz) = 7afb283746a8d9e2ad1bcf675e9a449f1890c298
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.86.0&format=tar.gz&prefix=ocaml-xcp-idl-1.86.0#/xcp-idl-1.86.0.tar.gz) = d75e273cad31cc3cea59950be37351b1207605d7
 
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
@@ -22,7 +22,7 @@ BuildRequires:  message-switch-devel
 Common interface definitions for XCP services.
 
 %package        devel
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.71.0&format=tar.gz&prefix=ocaml-xcp-idl-1.71.0#/xcp-idl-1.71.0.tar.gz) = 7afb283746a8d9e2ad1bcf675e9a449f1890c298
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.86.0&format=tar.gz&prefix=ocaml-xcp-idl-1.86.0#/xcp-idl-1.86.0.tar.gz) = d75e273cad31cc3cea59950be37351b1207605d7
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel%{?_isa}
@@ -32,7 +32,7 @@ Requires:       xs-opam-repo
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
-%global ocaml_libdir /usr/lib/opamroot/ocaml-system/lib
+%global ocaml_libdir %{_opamroot}/ocaml-system/lib
 %global build_ocaml_libdir %{buildroot}%{ocaml_libdir}
 
 %prep
@@ -40,6 +40,9 @@ developing applications that use %{name}.
 
 %build
 make %{?coverage:runtime-coverage}
+
+%check
+make test
 
 %install
 DESTDIR=${RPM_BUILD_ROOT} %{__make} install
@@ -74,6 +77,71 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Mon Nov 18 2019 Christian Lindig <christian.lindig@citrix.com> - 1.86.0-1
+- CP-32446: Introduce Xen.features_pv_host and Xen.features_hvm_host
+
+* Mon Oct 14 2019 Christian Lindig <christian.lindig@citrix.com> - 1.85.0-1
+- Merge REQ-627 SR-IOV support for NVidia GPUs
+
+* Tue Oct 01 2019 Christian Lindig <christian.lindig@citrix.com> - 1.84.0-1
+- Merge changes for Xen 4.13
+
+* Thu Sep 26 2019 Igor Druzhinin <igor.druzhinin@citrix.com> - 1.83.0-1
+- CA-327265: Modify shim_mib formula for Xen 4.13
+
+* Tue Sep 24 2019 Christian Lindig <christian.lindig@citrix.com> - 1.82.0-1
+- CA-326244: Debug: Remove unnecessary facility mutex
+- CA-326244: Debug: Remove unused get_all_debug_keys and its mutex
+- CA-326244: don't take thread local table lock during logging
+- CA-326244: do not include host name in log format
+- CA-326244: Leave hostname empty for now instead of removing its entry
+- Reduce Debug interface
+- Move tests to alcotest
+
+* Wed Sep 18 2019 Christian Lindig <christian.lindig@citrix.com> - 1.81.0-1
+- CA-326244: Store debug levels in Set ref and do not take lock during logging
+
+* Mon Sep 09 2019 Christian Lindig <christian.lindig@citrix.com> - 1.80.0-1
+- CA-325843: Modify pv-shim (Xen 4.12) memory requirements
+
+* Fri Aug 23 2019 Edwin Török <edvin.torok@citrix.com> - 1.79.0-2
+- bump packages after xs-opam update
+
+* Thu Aug 15 2019 Christian Lindig <christian.lindig@citrix.com> - 1.79.0-1
+- CA-322204: enable critical logging
+- Fix PCI function address formatting .%02x -> .%x
+- maintenance: Replace \r (DOS) by \n (Unix) line endings
+- maintenance: do not depend on bisect_ppx
+- maintenance: ounit and alcotest are test-only deps
+
+* Wed Aug 07 2019 Christian Lindig <christian.lindig@citrix.com> - 1.78.0-1
+- Simplify Makefile
+- Update storage_test so that it builds with dune build @all
+- Build storage_test always so it does not bitrot
+
+* Fri Aug 02 2019 Christian Lindig <christian.lindig@citrix.com> - 1.77.0-1
+- CP-31450: Add domid to Datapath.attach
+
+* Wed Jul 10 2019 Christian Lindig <christian.lindig@citrix.com> - 1.76.0-1
+- Avoid deprecated Re.get_all_ofs
+- Silence preprocess warnings
+
+* Tue Jun 25 2019 Christian Lindig <christian.lindig@citrix.com> - 1.75.0-1
+- CA-321983: use defaults or options for new nvidia vgpu fields
+
+* Thu Jun 06 2019 Christian Lindig <christian.lindig@citrix.com> - 1.74.0-1
+- Simplify Travis setup
+
+* Wed Jun 05 2019 Christian Lindig <christian.lindig@citrix.com> - 1.73.0-1
+- REQ-720: CP-31058: Update nvidia type.
+- CP-31160: Add 'config_file' back to IDL.
+- CP-31122: Add uuid in interface between Xapi and Xenopsd.
+- CP-31124: Add uuid in interface between Xapi and Gpumon.
+- CP-31321: Support extra_args for vGPU configuration
+
+* Wed May 08 2019 Christian Lindig <christian.lindig@citrix.com> - 1.72.0-1
+- Fix creation of default Vif.t
+
 * Tue Jan 29 2019 Christian Lindig <christian.lindig@citrix.com> - 1.71.0-1
 - CP-30508: Add iommu capability to Host information
 - Add whether host supports hvm to Host information
