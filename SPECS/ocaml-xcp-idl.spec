@@ -1,16 +1,16 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        1.86.0
+Version:        1.96.0
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.86.0&format=tar.gz&prefix=ocaml-xcp-idl-1.86.0#/xcp-idl-1.86.0.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.0&format=tar.gz&prefix=ocaml-xcp-idl-1.96.0#/xcp-idl-1.96.0.tar.gz
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.86.0&format=tar.gz&prefix=ocaml-xcp-idl-1.86.0#/xcp-idl-1.86.0.tar.gz) = d75e273cad31cc3cea59950be37351b1207605d7
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.0&format=tar.gz&prefix=ocaml-xcp-idl-1.96.0#/xcp-idl-1.96.0.tar.gz) = 86c794395db6d77688ccbff403459554d90bf1da
 
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
@@ -22,7 +22,7 @@ BuildRequires:  message-switch-devel
 Common interface definitions for XCP services.
 
 %package        devel
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.86.0&format=tar.gz&prefix=ocaml-xcp-idl-1.86.0#/xcp-idl-1.86.0.tar.gz) = d75e273cad31cc3cea59950be37351b1207605d7
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.0&format=tar.gz&prefix=ocaml-xcp-idl-1.96.0#/xcp-idl-1.96.0.tar.gz) = 86c794395db6d77688ccbff403459554d90bf1da
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel%{?_isa}
@@ -77,6 +77,55 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Fri May 29 2020 Christian Lindig <christian.lindig@citrix.com> - 1.96.0-1
+- maintenance: formatting fixes
+- maintenance: fix (deprecation) warnings
+- maintenance: drop unused Scheduler code
+- CA-338201: use a more efficient way of splitting a map
+- Optimization: store handles in the map
+- Optimization: do not build intermediate list
+- CA-338201: use mtime
+- CA-337546: use a single persistent pipe per scheduler, avoid using
+	pipes in Delay.wait
+- CA-337546: add mtime to opam file
+
+* Tue May 19 2020 Christian Lindig <christian.lindig@citrix.com> - 1.95.0-1
+- maintenance: remove ambiguity of doc comment
+- maintenance: Tweak comments
+- Maintenance: add ocamlformat configuration
+- maintenance: update dune to 2.0
+- format: format using ocamlformat 0.14
+- maintenance: reformat comments with stars in them
+
+* Tue Apr 14 2020 Christian Lindig <christian.lindig@citrix.com> - 1.94.0-1
+- add Sriov.enable_action_result Manual_successful, for manual sr-iov/vf
+	configuration support
+- Revert "add Sriov.enable_action_result Manual_successful, for manual
+	sr-iov/vf configuration support"
+
+* Mon Mar 23 2020 Christian Lindig <christian.lindig@citrix.com> - 1.93.0-1
+- Remove bisect_ppx instrumentation
+- CA-337000 escape non-printable characters in log msgs
+
+* Thu Mar 12 2020 Christian Lindig <christian.lindig@citrix.com> - 1.92.0-1
+- CP-33058 create a centralized cipher string
+
+* Mon Mar 02 2020 Christian Lindig <christian.lindig@citrix.com> - 1.91.0-1
+- Improve reliability of scheduler tests
+- CA-334912: Allow DMC in PV Shim
+
+* Tue Jan 28 2020 Christian Lindig <christian.lindig@citrix.com> - 1.89.0-1
+- REQ-627 CA-333495 add PCI.dequarantine
+
+* Mon Jan 06 2020 Christian Lindig <christian.lindig@citrix.com> - 1.88.0-1
+- maintenance: replace references to pervasives module
+- ci: use configuration from xs-opam
+- CA-328130 add speed to Vusb record
+
+* Mon Dec 09 2019 Christian Lindig <christian.lindig@citrix.com> - 1.87.0-1
+- maintenance: use ocamldoc's tags
+- maintenance: fix unintended bad markup in the docs
+
 * Mon Nov 18 2019 Christian Lindig <christian.lindig@citrix.com> - 1.86.0-1
 - CP-32446: Introduce Xen.features_pv_host and Xen.features_hvm_host
 
