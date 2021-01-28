@@ -12,6 +12,9 @@ Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl
 
 Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.0&format=tar.gz&prefix=ocaml-xcp-idl-1.96.0#/xcp-idl-1.96.0.tar.gz) = 86c794395db6d77688ccbff403459554d90bf1da
 
+# XCP-ng patches
+Patch1000: xcp-idl-1.96.0-replace-gethostbyname.patch
+
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
 
