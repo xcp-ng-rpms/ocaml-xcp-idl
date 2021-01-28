@@ -2,7 +2,7 @@
 
 Name:           ocaml-xcp-idl
 Version:        1.96.2
-Release:        2.1%{?dist}
+Release:        2.1.0.ipv6.1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
@@ -11,6 +11,9 @@ Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl
 
 
 Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.2&format=tar.gz&prefix=ocaml-xcp-idl-1.96.2#/xcp-idl-1.96.2.tar.gz) = 957630205ad5e4e092fa8181ff2339fe888d0e8a
+
+# XCP-ng specific sources and patches
+Patch1000: xcp-idl-1.96.0-replace-gethostbyname.patch
 
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
@@ -77,6 +80,9 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Thu Feb 17 2022 Benjamin Reis <benjamin.reis@vates.fr> - 1.96.2-2.1.0.ipv6.1
+- Add IPv6 patch: xcp-idl-1.96.0-replace-gethostbyname.patch
+
 * Mon Dec 20 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.2-2.1
 - Sync with CH 8.2.1
 - *** Upstream changelog ***
