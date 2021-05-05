@@ -1,16 +1,16 @@
-diff --git c/lib/open_uri.ml w/lib/open_uri.ml
-index b63df63..ca96ae1 100644
---- c/lib/open_uri.ml
-+++ w/lib/open_uri.ml
+diff --git a/lib/open_uri.ml b/lib/open_uri.ml
+index b63df639..ca96ae10 100644
+--- a/lib/open_uri.ml
++++ b/lib/open_uri.ml
 @@ -17,12 +17,22 @@
- 
+
  open Xapi_stdext_pervasives.Pervasiveext
- 
+
 +module D = Debug.Make (struct let name = "open_uri" end)
 +open D
 +
  let handle_socket f s = try f s with e -> Backtrace.is_important e ; raise e
- 
+
  let open_tcp f host port =
 -  let host_entry = Unix.gethostbyname host in
 -  let sockaddr = Unix.ADDR_INET (host_entry.Unix.h_addr_list.(0), port) in
@@ -28,10 +28,10 @@ index b63df63..ca96ae1 100644
    finally
      (fun () -> Unix.connect s sockaddr ; handle_socket f s)
      (fun () -> Unix.close s)
-diff --git c/lib/posix_channel.ml w/lib/posix_channel.ml
-index da9dda0..af919a9 100644
---- c/lib/posix_channel.ml
-+++ w/lib/posix_channel.ml
+diff --git a/lib/posix_channel.ml b/lib/posix_channel.ml
+index da9dda04..af919a96 100644
+--- a/lib/posix_channel.ml
++++ b/lib/posix_channel.ml
 @@ -207,9 +207,12 @@ let receive protocols =
    | V4V_proxy (_, _) ->
        assert false (* weight is 0 above *)
@@ -47,18 +47,18 @@ index da9dda0..af919a9 100644
          s
        with e -> Unix.close s ; raise e
      )
-diff --git c/misc/channel_helper.ml w/misc/channel_helper.ml
-index bf600d5..be1aea5 100644
---- c/misc/channel_helper.ml
-+++ w/misc/channel_helper.ml
+diff --git a/misc/channel_helper.ml b/misc/channel_helper.ml
+index bf600d52..be1aea5a 100644
+--- a/misc/channel_helper.ml
++++ b/misc/channel_helper.ml
 @@ -86,9 +86,14 @@ let help =
- 
+
  (* Commands *)
  let advertise_t _common_options_t proxy_socket =
 -  let s_ip = Lwt_unix.socket Lwt_unix.PF_INET Lwt_unix.SOCK_STREAM 0 in
 +  let unwrapped_ip = Scanf.ksscanf !ip (fun _ _ -> !ip) "[%s@]" Fun.id in
 +  let addr =
-+    Lwt_unix.ADDR_INET (Lwt_unix.inet_addr_of_string unwrapped_ip, port)
++    Lwt_unix.ADDR_INET (Unix.inet_addr_of_string unwrapped_ip, 0)
 +  in
 +  let family = Lwt_unix.domain_of_sockaddr addr in
 +  let s_ip = Lwt_unix.socket family Lwt_unix.SOCK_STREAM 0 in

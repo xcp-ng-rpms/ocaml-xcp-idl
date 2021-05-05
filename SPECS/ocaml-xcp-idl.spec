@@ -2,7 +2,7 @@
 
 Name:           ocaml-xcp-idl
 Version:        1.96.0
-Release:        1.1.0.ipv6.1%{?dist}
+Release:        1.1.0.ipv6.2%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
@@ -80,6 +80,9 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Fri Apr 30 2021 Benjamin Reis <benjamin.reis@vates.fr> - 1.96.0-1.1.0.ipv6.2
+- Modify xcp-idl-1.96.0-replace-gethostbyname.patch to align with upstream merge
+
 * Fri Jan 29 2021 Benjamin Reis <benjamin.reis@vates.fr> - 1.96.0-1.1.0.ipv6.1
 - Add IPv6 patch: xcp-idl-1.96.0-replace-gethostbyname.patch
 
