@@ -1,16 +1,16 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        1.96.0
+Version:        1.96.1
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.0&format=tar.gz&prefix=ocaml-xcp-idl-1.96.0#/xcp-idl-1.96.0.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.1&format=tar.gz&prefix=ocaml-xcp-idl-1.96.1#/xcp-idl-1.96.1.tar.gz
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.0&format=tar.gz&prefix=ocaml-xcp-idl-1.96.0#/xcp-idl-1.96.0.tar.gz) = 86c794395db6d77688ccbff403459554d90bf1da
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.1&format=tar.gz&prefix=ocaml-xcp-idl-1.96.1#/xcp-idl-1.96.1.tar.gz) = 485a86b4fafae6b6c6ce314f9d8f1a5ee623e1a0
 
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
@@ -22,7 +22,7 @@ BuildRequires:  message-switch-devel
 Common interface definitions for XCP services.
 
 %package        devel
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.0&format=tar.gz&prefix=ocaml-xcp-idl-1.96.0#/xcp-idl-1.96.0.tar.gz) = 86c794395db6d77688ccbff403459554d90bf1da
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.1&format=tar.gz&prefix=ocaml-xcp-idl-1.96.1#/xcp-idl-1.96.1.tar.gz) = 485a86b4fafae6b6c6ce314f9d8f1a5ee623e1a0
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel%{?_isa}
@@ -77,6 +77,10 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Thu Feb 11 2021 Ben Anson <ben.anson@citrix.com> - 1.96.1-1
+- CP-35026 optionally include client info in logs
+- CA-347560: Add VM.import_metadata_async
+
 * Fri May 29 2020 Christian Lindig <christian.lindig@citrix.com> - 1.96.0-1
 - maintenance: formatting fixes
 - maintenance: fix (deprecation) warnings
