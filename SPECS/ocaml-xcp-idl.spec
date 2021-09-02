@@ -2,7 +2,7 @@
 
 Name:           ocaml-xcp-idl
 Version:        1.96.1
-Release:        1.1%{?dist}
+Release:        1.2%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
@@ -77,6 +77,9 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Thu Sep 02 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.1-1.2
+- Rebuild for message-switch 1.23.1 from XS82E031
+
 * Tue May 18 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.1-1.1
 - Update for XS82E020 and rebuild for xs-opam-src 6.35.6
 - *** Upstream changelog ***
