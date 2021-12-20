@@ -1,16 +1,16 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        1.96.1
-Release:        1.2%{?dist}
+Version:        1.96.2
+Release:        2.1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.1&format=tar.gz&prefix=ocaml-xcp-idl-1.96.1#/xcp-idl-1.96.1.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.2&format=tar.gz&prefix=ocaml-xcp-idl-1.96.2#/xcp-idl-1.96.2.tar.gz
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.1&format=tar.gz&prefix=ocaml-xcp-idl-1.96.1#/xcp-idl-1.96.1.tar.gz) = 485a86b4fafae6b6c6ce314f9d8f1a5ee623e1a0
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.2&format=tar.gz&prefix=ocaml-xcp-idl-1.96.2#/xcp-idl-1.96.2.tar.gz) = 957630205ad5e4e092fa8181ff2339fe888d0e8a
 
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
@@ -22,7 +22,7 @@ BuildRequires:  message-switch-devel
 Common interface definitions for XCP services.
 
 %package        devel
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.1&format=tar.gz&prefix=ocaml-xcp-idl-1.96.1#/xcp-idl-1.96.1.tar.gz) = 485a86b4fafae6b6c6ce314f9d8f1a5ee623e1a0
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.2&format=tar.gz&prefix=ocaml-xcp-idl-1.96.2#/xcp-idl-1.96.2.tar.gz) = 957630205ad5e4e092fa8181ff2339fe888d0e8a
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel%{?_isa}
@@ -77,6 +77,16 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Mon Dec 20 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.2-2.1
+- Sync with CH 8.2.1
+- *** Upstream changelog ***
+- * Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.96.2-2
+- - Bump package after xs-opam update
+- * Mon Aug 23 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.96.2-1
+- - CP-38064: compatibility with rpclib 7
+- * Tue Jul 13 2021 Edwin Török <edvin.torok@citrix.com> - 1.96.1-2
+- - bump packages after xs-opam update
+
 * Thu Sep 02 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.1-1.2
 - Rebuild for message-switch 1.23.1 from XS82E031
 
