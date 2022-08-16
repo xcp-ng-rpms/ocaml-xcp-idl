@@ -1,16 +1,16 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        1.96.2
-Release:        2.1%{?dist}
+Version:        1.96.4
+Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.2&format=tar.gz&prefix=ocaml-xcp-idl-1.96.2#/xcp-idl-1.96.2.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.4&format=tar.gz&prefix=ocaml-xcp-idl-1.96.4#/xcp-idl-1.96.4.tar.gz
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.2&format=tar.gz&prefix=ocaml-xcp-idl-1.96.2#/xcp-idl-1.96.2.tar.gz) = 957630205ad5e4e092fa8181ff2339fe888d0e8a
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.4&format=tar.gz&prefix=ocaml-xcp-idl-1.96.4#/xcp-idl-1.96.4.tar.gz) = e9d1357cece33b37847392ce44a11ee736413546
 
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
@@ -22,7 +22,7 @@ BuildRequires:  message-switch-devel
 Common interface definitions for XCP services.
 
 %package        devel
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.2&format=tar.gz&prefix=ocaml-xcp-idl-1.96.2#/xcp-idl-1.96.2.tar.gz) = 957630205ad5e4e092fa8181ff2339fe888d0e8a
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.4&format=tar.gz&prefix=ocaml-xcp-idl-1.96.4#/xcp-idl-1.96.4.tar.gz) = e9d1357cece33b37847392ce44a11ee736413546
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel%{?_isa}
@@ -77,6 +77,12 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Tue May 17 2022 Christian Lindig <christian.lindig@citrix.com> - 1.96.4-1
+- CA-363633: Always take the generation-id directly from xapi
+- CA-361220: xenopsd: introduce TASK.destroy_on_finish
+- Remove CPUID levelling v1 compat code
+- Add featureset to xenopsd VM state
+
 * Mon Dec 20 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.2-2.1
 - Sync with CH 8.2.1
 - *** Upstream changelog ***
@@ -87,15 +93,18 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 - * Tue Jul 13 2021 Edwin Török <edvin.torok@citrix.com> - 1.96.1-2
 - - bump packages after xs-opam update
 
-* Thu Sep 02 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.1-1.2
-- Rebuild for message-switch 1.23.1 from XS82E031
+* Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.96.2-2
+- Bump package after xs-opam update
 
-* Tue May 18 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.1-1.1
-- Update for XS82E020 and rebuild for xs-opam-src 6.35.6
-- *** Upstream changelog ***
-- * Thu Feb 11 2021 Ben Anson <ben.anson@citrix.com> - 1.96.1-1
-- - CP-35026 optionally include client info in logs
-- - CA-347560: Add VM.import_metadata_async
+* Mon Aug 23 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.96.2-1
+- CP-38064: compatibility with rpclib 7
+
+* Tue Jul 13 2021 Edwin Török <edvin.torok@citrix.com> - 1.96.1-2
+- bump packages after xs-opam update
+
+* Thu Feb 11 2021 Ben Anson <ben.anson@citrix.com> - 1.96.1-1
+- CP-35026 optionally include client info in logs
+- CA-347560: Add VM.import_metadata_async
 
 * Thu Nov 05 2020 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.0-1.1
 - Rebuild for xs-opam-src 6.35.1 from XS82E002
