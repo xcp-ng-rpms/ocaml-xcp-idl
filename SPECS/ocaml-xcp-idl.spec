@@ -2,7 +2,7 @@
 
 Name:           ocaml-xcp-idl
 Version:        1.96.4
-Release:        1%{?dist}
+Release:        1.1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
@@ -77,20 +77,26 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
-* Tue May 17 2022 Christian Lindig <christian.lindig@citrix.com> - 1.96.4-1
-- CA-363633: Always take the generation-id directly from xapi
-- CA-361220: xenopsd: introduce TASK.destroy_on_finish
-- Remove CPUID levelling v1 compat code
-- Add featureset to xenopsd VM state
+* Tue Aug 23 2022 Gael Duperrey <gduperrey@vates.fr> - 1.96.4-1.1
+- Sync to hotfix XS82ECU1011
+- * Tue May 17 2022 Christian Lindig <christian.lindig@citrix.com> - 1.96.4-1
+- - CA-363633: Always take the generation-id directly from xapi
+- - CA-361220: xenopsd: introduce TASK.destroy_on_finish
+- - Remove CPUID levelling v1 compat code
+- - Add featureset to xenopsd VM state
 
-* Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.96.2-2
-- Bump package after xs-opam update
+* Mon Dec 20 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.2-2.1
+- Sync with CH 8.2.1
+- *** Upstream changelog ***
+- * Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.96.2-2
+- - Bump package after xs-opam update
+- * Mon Aug 23 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.96.2-1
+- - CP-38064: compatibility with rpclib 7
+- * Tue Jul 13 2021 Edwin Török <edvin.torok@citrix.com> - 1.96.1-2
+- - bump packages after xs-opam update
 
-* Mon Aug 23 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 1.96.2-1
-- CP-38064: compatibility with rpclib 7
-
-* Tue Jul 13 2021 Edwin Török <edvin.torok@citrix.com> - 1.96.1-2
-- bump packages after xs-opam update
+* Thu Sep 02 2021 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.1-1.2
+- Rebuild for message-switch 1.23.1 from XS82E031
 
 * Thu Feb 11 2021 Ben Anson <ben.anson@citrix.com> - 1.96.1-1
 - CP-35026 optionally include client info in logs
