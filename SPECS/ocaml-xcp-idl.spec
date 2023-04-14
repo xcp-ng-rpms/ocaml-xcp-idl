@@ -1,28 +1,20 @@
-%global debug_package %{nil}
+%global package_speccommit 55482de08fa11f20694a41962a61cbaf89b2247b
+%global package_srccommit v1.96.4
 
 Name:           ocaml-xcp-idl
-Version:        1.96.4
-Release:        1.2%{?dist}
+Version: 1.96.4
+Release: 2.1%{?xsrel}%{?dist}
 Summary:        Common interface definitions for XCP services
-License:        LGPL
+License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-idl
-
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.4&format=tar.gz&prefix=ocaml-xcp-idl-1.96.4#/xcp-idl-1.96.4.tar.gz
-
-
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.4&format=tar.gz&prefix=ocaml-xcp-idl-1.96.4#/xcp-idl-1.96.4.tar.gz) = e9d1357cece33b37847392ce44a11ee736413546
-
+Source0: xcp-idl-1.96.4.tar.gz
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
-
-%global _use_internal_dependency_generator 0
-%global __requires_exclude *caml*
 
 %description
 Common interface definitions for XCP services.
 
 %package        devel
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-idl/archive?at=v1.96.4&format=tar.gz&prefix=ocaml-xcp-idl-1.96.4#/xcp-idl-1.96.4.tar.gz) = e9d1357cece33b37847392ce44a11ee736413546
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel%{?_isa}
@@ -32,7 +24,9 @@ Requires:       xs-opam-repo
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
-%global ocaml_libdir %{_opamroot}/ocaml-system/lib
+%global ocaml_dir %{_opamroot}/ocaml-system
+%global ocaml_libdir %{ocaml_dir}/lib
+%global ocaml_bindir %{ocaml_dir}/bin
 %global build_ocaml_libdir %{buildroot}%{ocaml_libdir}
 
 %prep
@@ -77,11 +71,20 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
-* Wed Oct 12 2022 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.94.4-1.2
-- Rebuild for security update synced from XS82ECU1019$
+* Fri Apr 14 2023 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.4-2.1
+- Sync with hotfix XS82ECU1027
+- *** Upstream changelog ***
+- * Thu Feb 23 2023 Pau Ruiz Safont <pau.ruizsafont@cloud.com> - 1.96.4-2
+- - Change license to match the one in the source repo
+- - Remove macro for dependency generator
+- - Be more specific on installable files
+
+* Wed Oct 12 2022 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.4-1.2
+- Rebuild for security update synced from XS82ECU1019
 
 * Tue Aug 23 2022 Gael Duperrey <gduperrey@vates.fr> - 1.96.4-1.1
 - Sync to hotfix XS82ECU1011
+- *** Upstream changelog ***
 - * Tue May 17 2022 Christian Lindig <christian.lindig@citrix.com> - 1.96.4-1
 - - CA-363633: Always take the generation-id directly from xapi
 - - CA-361220: xenopsd: introduce TASK.destroy_on_finish
@@ -120,7 +123,7 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 - Optimization: do not build intermediate list
 - CA-338201: use mtime
 - CA-337546: use a single persistent pipe per scheduler, avoid using
-	pipes in Delay.wait
+    pipes in Delay.wait
 - CA-337546: add mtime to opam file
 
 * Tue May 19 2020 Christian Lindig <christian.lindig@citrix.com> - 1.95.0-1
@@ -133,9 +136,9 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 
 * Tue Apr 14 2020 Christian Lindig <christian.lindig@citrix.com> - 1.94.0-1
 - add Sriov.enable_action_result Manual_successful, for manual sr-iov/vf
-	configuration support
+    configuration support
 - Revert "add Sriov.enable_action_result Manual_successful, for manual
-	sr-iov/vf configuration support"
+    sr-iov/vf configuration support"
 
 * Mon Mar 23 2020 Christian Lindig <christian.lindig@citrix.com> - 1.93.0-1
 - Remove bisect_ppx instrumentation
