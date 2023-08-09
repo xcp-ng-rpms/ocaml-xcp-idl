@@ -1,13 +1,13 @@
-%global package_speccommit 55482de08fa11f20694a41962a61cbaf89b2247b
-%global package_srccommit v1.96.4
+%global package_speccommit d6d355baeb467f29e93f7ff4a20f1a7f7cb0687f
+%global package_srccommit v1.96.5
 
 Name:           ocaml-xcp-idl
-Version: 1.96.4
-Release: 2.1%{?xsrel}%{?dist}
+Version: 1.96.5
+Release: 1.1%{?xsrel}%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-idl
-Source0: xcp-idl-1.96.4.tar.gz
+Source0: xcp-idl-1.96.5.tar.gz
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
 
@@ -71,6 +71,21 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Wed Aug 09 2023 Gael Duperrey <gduperrey@vates.fr> - 1.96.5-1.1
+- Sync with hotfix XS82ECU1040
+- *** Upstream changelog ***
+- * Thu Jul 20 2023 Rob Hoes <rob.hoes@citrix.com> - 1.96.5-1
+- - Introduce functions in CPU feature sets in xenopsd
+- - xenopsd: change type of reported CPU feature-sets to an abstract type
+- * Mon Jun 19 2023 Christian Lindig <christian.lindig@citrix.com> - 1.96.4-6
+- - Bump release and rebuild
+- * Thu Jun 08 2023 Christian Lindig <christian.lindig@citrix.com> - 1.96.4-5
+- - Bump release and rebuild
+- * Fri May 12 2023 Christian Lindig <christian.lindig@citrix.com> - 1.96.4-4
+- - Bump release and rebuild
+- * Fri May 12 2023 Christian Lindig <christian.lindig@citrix.com> - 1.96.4-3
+- - Bump release and rebuild
+
 * Fri Apr 14 2023 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.4-2.1
 - Sync with hotfix XS82ECU1027
 - *** Upstream changelog ***
