@@ -1,13 +1,13 @@
-%global package_speccommit f26b1deb27a7a651873648afafeb37bd4a718bbe
-%global package_srccommit v1.96.5
+%global package_speccommit 4ddab98ef103a72f8e06affd57c49cc6cd40960e
+%global package_srccommit v1.96.7
 
 Name:           ocaml-xcp-idl
-Version: 1.96.5
-Release: 2.1%{?xsrel}%{?dist}
+Version: 1.96.7
+Release: 4.1%{?xsrel}%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-idl
-Source0: xcp-idl-1.96.5.tar.gz
+Source0: xcp-idl-1.96.7.tar.gz
 BuildRequires:  xs-opam-repo
 BuildRequires:  message-switch-devel
 
@@ -71,6 +71,28 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Mon Jun 03 2024 Gael Duperrey <gduperrey@vates.tech> - 1.96.7-4.1
+- Sync with hotfix XS82ECU1064
+- *** Upstream changelog ***
+- * Fri Mar 08 2024 Christian Lindig <christian.lindig@cloud.com> - 1.96.7-4
+- - Bump release and rebuild
+- * Wed Mar 06 2024 Christian Lindig <christian.lindig@cloud.com> - 1.96.7-3
+- - Bump release and rebuild
+- * Tue Mar 05 2024 Christian Lindig <christian.lindig@cloud.com> - 1.96.7-2
+- - Bump release and rebuild
+- * Fri Nov 03 2023 Christian Lindig <christian.lindig@cloud.com> - 1.96.7-1
+- - CP-42182 remove rrd-cli, it's now in xcp-rrdd
+- * Fri Nov 03 2023 Christian Lindig <christian.lindig@citrix.com> - 1.96.6-5
+- - Don't install rrd-cli binary. It moved into the xcp-rrdd package.
+- * Tue Oct 24 2023 Christian Lindig <christian.lindig@cloud.com> - 1.96.6-4
+- - Bump release and rebuild
+- * Tue Oct 24 2023 Christian Lindig <christian.lindig@cloud.com> - 1.96.6-3
+- - Bump release and rebuild
+- * Thu Oct 19 2023 Christian Lindig <christian.lindig@citrix.com> - 1.96.6-2
+- - install rrd-cli in install section
+- * Wed Oct 18 2023 Christian Lindig <christian.lindig@cloud.com> - 1.96.6-1
+- - CP-42182 Add CLI tool on xe and rrd-cli to enable saving of rrds to local host
+
 * Fri Oct 13 2023 Samuel Verschelde <stormi-xcp@ylix.fr> - 1.96.5-2.1
 - Rebuild after sync with hotfix XS82ECU1049
 - No source changes: only rebuild for dependencies
