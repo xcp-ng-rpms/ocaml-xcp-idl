@@ -1,9 +1,9 @@
-%global package_speccommit 4ddab98ef103a72f8e06affd57c49cc6cd40960e
+%global package_speccommit 363fac75b08bb0cd90b151ad42ea30c67accb6f9
 %global package_srccommit v1.96.7
 
 Name:           ocaml-xcp-idl
 Version: 1.96.7
-Release: 4.1%{?xsrel}%{?dist}
+Release: 6.1%{?xsrel}%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-idl
@@ -71,6 +71,14 @@ touch %{build_ocaml_libdir}/xapi-idl/opam.config
 %{ocaml_libdir}/xapi-idl/*.mli
 
 %changelog
+* Thu Oct 24 2024 Gael Duperrey <gduperrey@vates.tech> - 1.96.7-6.1
+- Sync with hotfix XS82ECU1074
+- *** Upstream changelog ***
+- * Thu Aug 29 2024 Christian Lindig <christian.lindig@cloud.com> - 1.96.7-6
+- - Bump release and rebuild
+- * Wed Jun 19 2024 Christian Lindig <christian.lindig@cloud.com> - 1.96.7-5
+- - Bump release and rebuild
+
 * Mon Jun 03 2024 Gael Duperrey <gduperrey@vates.tech> - 1.96.7-4.1
 - Sync with hotfix XS82ECU1064
 - *** Upstream changelog ***
